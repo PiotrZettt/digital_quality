@@ -67,7 +67,7 @@ Create a Postgres database and put all the credentials including name, username,
 The app uses the django-tenant package to provide a multi-tenant functionality.
 Please read the django-tenant documentation for further details.
 
-To run the app: \
+To run the app: 
 ```commandline
 python manage.py runserver
 ```
