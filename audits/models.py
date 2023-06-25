@@ -17,4 +17,4 @@ class Question(models.Model):
 class Answer(models.Model):
     question = models.OneToOneField(Question, on_delete=models.CASCADE, related_name="answer")
     answer = models.BooleanField()
-
+    comment = models.CharField(max_length=300, default="")
