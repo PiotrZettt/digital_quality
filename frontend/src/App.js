@@ -1,9 +1,11 @@
 import React from "react";
-import reactDom from "react-dom";
+import CreateClientForm from "./components/Register";
 
 function App(){
     return <div>
-        <h3>This is  The Digital Quality App - ISINSPEC</h3>
+        <h3>ISINSPEC</h3>
+        <h4>The Digital Quality App</h4>
+        <CreateClientForm/>
     </div>
 }
 

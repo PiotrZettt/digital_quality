@@ -48,6 +48,7 @@ SHARED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "rest_framework.authtoken",
 ]
 
 TENANT_APPS = ["rest_framework", "profiles", "stock_flow", "audits", "frontend"]
@@ -57,12 +58,14 @@ INSTALLED_APPS = list(SHARED_APPS) + [app for app in TENANT_APPS if app not in S
 ROOT_URLCONF = "project.urls"
 PUBLIC_SCHEMA_URLCONF = "project.urls_public"
 
+# SHOW_PUBLIC_IF_NO_TENANT_FOUND = True
+
 TENANT_MODEL = "accounts.Client"  # app.Model
 
-TENANT_DOMAIN_MODEL = "accounts.Domain"  # app.Model
+TENANT_DOMAIN_MODEL = "accounts.Domain"  # app.Domain
 
 MIDDLEWARE = [
-    "django_tenants.middleware.default.DefaultTenantMiddleware",
+    "django_tenants.middleware.main.TenantMainMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -97,7 +100,7 @@ WSGI_APPLICATION = "project.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django_tenants.postgresql_backend",
-        "NAME": "DigitalQuality",
+        "NAME": "digital_quality",
         "USER": "piotrzielinski",
         "PASSWORD": "tenants_password",
         "HOST": "localhost",
