@@ -18,12 +18,20 @@ const CreateClientForm = () => {
         on_trial: false,
       };
 
+      const domainData = {
+        domain: schemaName,
+        tenant: schemaName,
+      }
+
       axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
       axios.defaults.xsrfCookieName = "csrftoken";
       axios.defaults.withCredentials = true;
 
       // Send the request to create the client
-      const response = await axios.post('accounts/api/tenants/', clientData);
+      const response = await axios.all(
+        [axios.post('/accounts/api/tenants/', clientData),
+        axios.post('/accounts/api/domains/', domainData)]
+      );
 
       // Handle the response as needed
       console.log(response.data);
@@ -46,7 +54,7 @@ const CreateClientForm = () => {
       </label>
       <label>
         Client Name:
-        <input type="text" value={clientName} onChange={(e) => setClientName(e.target.value)} />
+        <input type="text" value={clientName} onChange={(e) => {setClientName(e.target.value); setSchemaName(e.target.value.toLowerCase())}} />
       </label>
       <label>
         Paid Until:

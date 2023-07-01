@@ -1,10 +1,11 @@
 from django.contrib import admin
-from .models import Audit, Question, Answer
+
+from .models import Answer, Audit, Question
 
 
 class AuditAdmin(admin.ModelAdmin):
     model = Audit
-    list_display = ["title", "description", "auditor", "date_created"]
+    list_display = ["title", "description", "date_created"]
 
 
 class QuestionAdmin(admin.ModelAdmin):

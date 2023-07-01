@@ -100,7 +100,7 @@ WSGI_APPLICATION = "project.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django_tenants.postgresql_backend",
-        "NAME": "digital_quality",
+        "NAME": "saas",
         "USER": "piotrzielinski",
         "PASSWORD": "tenants_password",
         "HOST": "localhost",
@@ -110,8 +110,9 @@ DATABASES = {
 DATABASE_ROUTERS = ["django_tenants.routers.TenantSyncRouter"]
 
 
-# Password validation
-# https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
+# auth
+
+AUTH_USER_MODEL = "accounts.User"
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -150,3 +151,5 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+LOGIN_REDIRECT_URL = "profiles:home"

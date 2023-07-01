@@ -1,10 +1,9 @@
-from django.urls import include, path
-from rest_framework import routers
+from django.urls import path
 
-from .views import ProfileSerializerViewSet
+from .views import profile_view
 
-router = routers.DefaultRouter()
+app_name = "profiles"
 
-router.register(r"profiles", ProfileSerializerViewSet)
-
-urlpatterns = [path("api/", include(router.urls))]
+urlpatterns = [
+    path("home/", profile_view, name="home"),
+]

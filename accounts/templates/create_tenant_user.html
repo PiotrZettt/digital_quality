@@ -1,0 +1,14 @@
+<!-- create_tenant_user.html -->
+<form method="POST" action="{% url 'create_tenant_user' %}">
+  {% csrf_token %}
+  <label for="company_name">Company:</label>
+  <input type="text" name="company_name" required>
+  <br>
+  <label for="username">Username:</label>
+  <input type="text" name="username" required>
+  <br>
+  <label for="password">Password:</label>
+  <input type="password" name="password" required>
+  <br>
+  <input type="submit" value="Create Tenant User">
+</form>
