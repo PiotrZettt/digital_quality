@@ -1,4 +1,4 @@
-from django.contrib.auth.views import LoginView
+from allauth.account.views import LoginView, SignupView
 from django.http import HttpResponse
 from django.shortcuts import render
 from django_tenants.utils import schema_context
@@ -46,6 +46,29 @@ def create_tenant_user_view(request):
 
     # Render the form template for user input
     return render(request, "create_tenant_user.html")
+
+
+class CustomSignupView(SignupView):
+    def form_valid(self, form):
+        # Get the company name from the form input
+        company = form.cleaned_data["company"]
+
+        # Create the tenant name based on the company name
+        schema_name = "".join(company.split(" ")).lower()
+
+        # Create the schema using django-tenants
+        with schema_context(schema_name):
+            # Create the tenant
+            tenant = Client(name=company, schema_name=schema_name)
+            tenant.save()
+
+            # Assign the tenant to the user
+            user = form.save(self.request)
+            user.tenant = tenant
+            user.save()
+
+        # Call the parent class's form_valid method
+        return super().form_valid(form)
 
 
 class CustomLoginView(LoginView):
