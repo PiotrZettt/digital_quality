@@ -1,6 +1,23 @@
 # Digital Quality
 A digital inspection SaaS app
 
+## TODO
+
+- [x] Install Requirements
+- [x] Setup Pre-commit
+- [x] Setup Postgres DB
+- [ ] Setup testing
+- [x] Create multi-tenant based on a DB Schema functionality
+- [x] User/Tenant creation and log-in
+- [x] All-Auth integration
+- [ ] Modelling data for:
+    - [ ] Stock Flow module
+    - [ ] Audits module
+    - [ ] PDI module
+- [ ] Build the Frontend
+- [ ] Setup Gunicorn
+- [ ] Deploy
+
 ## Setup project
 
 Create a new folder and clone the repo.
@@ -36,7 +53,7 @@ touch requirements-dev.txt && open requirements-dev.txt
 ```
 Add: \
 pip-tools \
-pre-commit 
+pre-commit
 
 Save and close the file.
 
@@ -45,7 +62,7 @@ Install the dev tools:
 pip install -r requirements-dev.txt
 ```
 
-Compile the requirements.txt file by 
+Compile the requirements.txt file by
 ```commandline
 pip-compile
 ```
@@ -67,7 +84,7 @@ Create a Postgres database and put all the credentials including name, username,
 The app uses the django-tenant package to provide a multi-tenant functionality.
 Please read the django-tenant documentation for further details.
 
-To run the app: 
+To run the app:
 ```commandline
 python manage.py runserver
 ```
