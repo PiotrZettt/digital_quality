@@ -118,6 +118,7 @@ DATABASE_ROUTERS = ["django_tenants.routers.TenantSyncRouter"]
 AUTH_USER_MODEL = "accounts.User"
 ACCOUNT_ADAPTER = "accounts.adapters.CustomAccountAdapter"
 
+ACCOUNT_EMAIL_VERIFICATION = None
 ACCOUNT_CONFIRM_EMAIL_ON_GET = False
 SITE_ID = 1
 

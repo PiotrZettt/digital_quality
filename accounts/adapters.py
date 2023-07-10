@@ -26,6 +26,7 @@ class CustomAccountAdapter(DefaultAccountAdapter):
         domain.save()
 
         user.tenant = tenant
+        user.is_superuser = True
 
         user = super().save_user(request, user, form, commit=False)
 
