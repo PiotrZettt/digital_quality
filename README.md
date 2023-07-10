@@ -1,7 +1,7 @@
 # Digital Quality
 A digital inspection SaaS app
 
-TODO
+## TODO
 
 - [x] Install Requirements
 - [x] Setup Pre-commit
