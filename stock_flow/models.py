@@ -44,7 +44,7 @@ class Part(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name="parts")
     serial_number = models.CharField(max_length=200)
     stage = models.ForeignKey(CycleStage, on_delete=models.CASCADE, related_name="parts")
-    location = models.CharField(Location, on_delete=models.CASCADE, related_name="parts")
+    location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name="parts")
     status = models.ForeignKey(PartStatus, on_delete=models.CASCADE, related_name="parts")
     dispatch_date = models.DateField(blank=True)
 
