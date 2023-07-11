@@ -51,7 +51,7 @@ SHARED_APPS = [
     "rest_framework.authtoken",
 ]
 
-TENANT_APPS = ["rest_framework", "profiles", "stock_flow", "audits", "frontend"]
+TENANT_APPS = ["rest_framework", "profiles", "stock_flow", "audits", "pdi", "frontend"]
 
 INSTALLED_APPS = list(SHARED_APPS) + [app for app in TENANT_APPS if app not in SHARED_APPS]
 
@@ -100,7 +100,7 @@ WSGI_APPLICATION = "project.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django_tenants.postgresql_backend",
-        "NAME": "saas",
+        "NAME": "SaaS",
         "USER": "piotrzielinski",
         "PASSWORD": "tenants_password",
         "HOST": "localhost",

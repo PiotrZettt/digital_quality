@@ -2,7 +2,7 @@ from django.db import models
 
 from stock_flow.models import Project
 
-ANSWER_CHOICES = ["OK", "NOT OK", "N/A"]
+ANSWER_CHOICES = (("OK", "OK"), ("NOK", "NOT OK"), ("N/A", "NOT APPLICABLE"))
 
 
 class PdiCheckList(models.Model):

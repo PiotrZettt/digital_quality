@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Customer, Project, Part
+
+from .models import Customer, Part, Project
 
 
 class CustomerAdmin(admin.ModelAdmin):
@@ -9,7 +10,7 @@ class CustomerAdmin(admin.ModelAdmin):
 
 class ProjectAdmin(admin.ModelAdmin):
     model = Project
-    list_display = ["customer", "project_code", "name", "picture"]
+    list_display = ["customer", "project_internal_code", "project_customer_code", "name", "picture"]
 
 
 class PartAdmin(admin.ModelAdmin):

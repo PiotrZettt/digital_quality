@@ -17,7 +17,6 @@ def create_tenant_user_view(request):
         # Retrieve the form data submitted by the user
         company_name = request.POST["company_name"]
         schema_name = "".join(company_name.split(" ")).lower()
-        username = request.POST["username"]
         password = request.POST["password"]
 
         tenant = Client(
@@ -38,7 +37,7 @@ def create_tenant_user_view(request):
         # Create the tenant user within the appropriate schema context
         with schema_context(schema_name):
             User.objects.create_user(
-                username=username, password=password, tenant=tenant, is_staff=True, is_superuser=True
+                username=schema_name, password=password, tenant=tenant, is_staff=False, is_superuser=False
             )
 
         # Return a success response or redirect to another page

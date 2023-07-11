@@ -1,4 +1,4 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, Group, Permission
 from django.db import models
 from django_tenants.models import DomainMixin, TenantMixin
 
@@ -11,6 +11,8 @@ class Client(TenantMixin):
 
 class User(AbstractUser):
     tenant = models.ForeignKey(Client, on_delete=models.CASCADE)
+    groups = models.ManyToManyField(Group, related_name="account_users")
+    user_permissions = models.ManyToManyField(Permission, related_name="accounts_permissions")
 
 
 class Domain(DomainMixin):

@@ -9,19 +9,21 @@ A digital inspection SaaS app
 - [ ] Setup testing
 - [x] Create multi-tenant based on a DB Schema functionality
 - [x] User/Tenant creation and log-in
-- [x] All-Auth integration
+- [ ] All-Auth integration
 - [x] Modelling data for:
     - [x] Stock Flow module
     - [x] Audits module
     - [x] PDI module
-- [ ] Build the Frontend
+- [ ] Create API serializers and views
+- [ ] Build the Frontend:
     - [ ] Home Page
     - [ ] User/Tenant creation
     - [ ] Login
-    - [ ] Your Staff
-    - [ ] Your Stock
-    - [ ] Your Audits
-    - [ ] Your PDIs
+    - [ ] Your Company Profile
+      - [ ] Your Staff
+      - [ ] Your Stock
+      - [ ] Your Audits
+      - [ ] Your PDIs
     - [ ] Your Dashboard
     - [ ] Your Customer Dashboard
 - [ ] Setup Gunicorn
