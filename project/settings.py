@@ -42,6 +42,7 @@ ALLOWED_HOSTS: list[str] = env("ALLOWED_HOSTS")
 SHARED_APPS = [
     "django_tenants",
     "accounts",
+    "django.contrib.sites",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -49,6 +50,8 @@ SHARED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework.authtoken",
+    "allauth",
+    "allauth.account",
 ]
 
 TENANT_APPS = ["rest_framework", "profiles", "stock_flow", "audits", "frontend"]
@@ -113,6 +116,17 @@ DATABASE_ROUTERS = ["django_tenants.routers.TenantSyncRouter"]
 # auth
 
 AUTH_USER_MODEL = "accounts.User"
+ACCOUNT_ADAPTER = "accounts.adapters.CustomAccountAdapter"
+
+ACCOUNT_EMAIL_VERIFICATION = None
+ACCOUNT_CONFIRM_EMAIL_ON_GET = False
+SITE_ID = 1
+
+ACCOUNT_FORMS = {
+    "signup": "accounts.forms.CustomSignupForm",
+    "login": "accounts.forms.CustomLoginForm",
+}
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -129,6 +143,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    "django.contrib.auth.backends.ModelBackend",
+    # `allauth` specific authentication methods, such as login by e-mail
+    "allauth.account.auth_backends.AuthenticationBackend",
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
