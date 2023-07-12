@@ -17,31 +17,42 @@ def create_tenant_user_view(request):
         # Retrieve the form data submitted by the user
         company_name = request.POST["company_name"]
         schema_name = "".join(company_name.split(" ")).lower()
-        password = request.POST["password"]
+        password1 = request.POST["password1"]
+        password2 = request.POST["password2"]
+        email = request.POST["email"]
 
-        tenant = Client(
-            schema_name=schema_name,
-            name=company_name,
-        )
-        tenant.save()
-
-        # Add one or more domains for the tenant
-        domain = Domain()
-        domain.domain = (
-            schema_name + ".localhost"
-        )  # don't add your port or www here! on a local server you'll want to use localhost here
-        domain.tenant = tenant
-        domain.is_primary = True
-        domain.save()
-
-        # Create the tenant user within the appropriate schema context
-        with schema_context(schema_name):
-            User.objects.create_user(
-                username=schema_name, password=password, tenant=tenant, is_staff=False, is_superuser=False
+        if password1 == password2:
+            tenant = Client(
+                schema_name=schema_name,
+                name=company_name,
             )
+            tenant.save()
 
-        # Return a success[ response or redirect to another page
-        return HttpResponseRedirect(f"http://{domain}:8000/accounts/login")
+            # Add one or more domains for the tenant
+            domain = Domain()
+            domain.domain = (
+                schema_name + ".localhost"
+            )  # don't add your port or www here! on a local server you'll want to use localhost here
+            domain.tenant = tenant
+            domain.is_primary = True
+            domain.save()
+
+            # Create the tenant user within the appropriate schema context
+            with schema_context(schema_name):
+                User.objects.create_user(
+                    username=schema_name,
+                    password=password1,
+                    email=email,
+                    tenant=tenant,
+                    is_staff=False,
+                    is_superuser=False,
+                )
+
+            # Return a success[ response or redirect to another page]
+            return HttpResponseRedirect(f"http://{domain}:8000/accounts/login")
+        else:
+            context = {"error_message": "Your confirmation password doesn't match"}
+            return render(request, "create_tenant_user.html", context=context)
 
     # Render the form template for user input
     return render(request, "create_tenant_user.html")

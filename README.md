@@ -14,6 +14,8 @@ and their own DB schema created for data isolation.
 - [ ] Setup testing
 - [x] Create multi-tenant based on a DB Schema functionality
 - [ ] User/Tenant creation and log-in
+- [ ] Email account verification
+- [ ] Create and add user permissions
 - [ ] All-Auth integration (optional)
 - [x] Modelling data for:
     - [x] Stock Flow module
