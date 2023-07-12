@@ -1,5 +1,5 @@
 from django.contrib.auth.views import LoginView
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django_tenants.utils import schema_context
 from rest_framework import parsers, permissions, renderers, viewsets
@@ -40,8 +40,8 @@ def create_tenant_user_view(request):
                 username=schema_name, password=password, tenant=tenant, is_staff=False, is_superuser=False
             )
 
-        # Return a success response or redirect to another page
-        return HttpResponse("Tenant user created successfully!")
+        # Return a success[ response or redirect to another page
+        return HttpResponseRedirect(f"http://{domain}:8000/accounts/login")
 
     # Render the form template for user input
     return render(request, "create_tenant_user.html")

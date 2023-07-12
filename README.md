@@ -1,5 +1,10 @@
 # Digital Quality
-A digital inspection SaaS app
+A digital inspection SaaS app.
+
+The app provides useful quality inspection tools like audits and PDI forms, stock movement and quality analysys.
+At the moment there are three modules of "Stock Flow", "Pre Delivery Inspection" and "Internal Audits."
+The app is based on multi-tenant - shared database - isolated schema approach. Each user will have their own subdomain
+and their own DB schema created for data isolation.
 
 ## TODO
 
@@ -8,8 +13,8 @@ A digital inspection SaaS app
 - [x] Setup Postgres DB
 - [ ] Setup testing
 - [x] Create multi-tenant based on a DB Schema functionality
-- [x] User/Tenant creation and log-in
-- [ ] All-Auth integration
+- [ ] User/Tenant creation and log-in
+- [ ] All-Auth integration (optional)
 - [x] Modelling data for:
     - [x] Stock Flow module
     - [x] Audits module

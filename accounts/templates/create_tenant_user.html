@@ -1,11 +1,19 @@
-<!-- create_tenant_user.html -->
-<form method="POST" action="{% url 'create_tenant_user' %}">
+{% extends 'base_generic.html' %}  <!-- If you have a base template, otherwise remove this line -->
+
+{% block content %}
+  <h2>SignIn</h2>
+<form method="POST" action="{% url 'signin' %}">
   {% csrf_token %}
+    {{ form.as_p }}
   <label for="company_name">Company:</label>
   <input type="text" name="company_name" required>
   <br>
   <label for="password">Password:</label>
   <input type="password" name="password" required>
   <br>
-  <input type="submit" value="Create Tenant User">
-</form>
+  <input type="submit" value="Create Account">
+    {% if error_message %}
+      <p>{{ error_message }}</p>
+    {% endif %}
+  </form>
+{% endblock %}
