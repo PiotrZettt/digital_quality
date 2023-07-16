@@ -1,6 +1,8 @@
 from django.contrib.auth.views import LoginView
+from django.core.mail import send_mail
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.views import View
 from django_tenants.utils import schema_context
 from rest_framework import parsers, permissions, renderers, viewsets
 from rest_framework.authtoken.models import Token
@@ -8,6 +10,7 @@ from rest_framework.authtoken.serializers import AuthTokenSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from .forms import RegistrationForm
 from .models import Client, Domain, User
 from .serializers import ClientSerializer, DomainSerializer
 
@@ -52,10 +55,64 @@ def create_tenant_user_view(request):
             return HttpResponseRedirect(f"http://{domain}:8000/accounts/login")
         else:
             context = {"error_message": "Your confirmation password doesn't match"}
-            return render(request, "create_tenant_user.html", context=context)
+            return render(request, "register.html", context=context)
 
     # Render the form template for user input
-    return render(request, "create_tenant_user.html")
+    return render(request, "register.html")
+
+
+class UserRegistrationView(View):
+    def get(self, request):
+        form = RegistrationForm()
+        return render(request, "register.html", {"form": form})
+
+    def post(self, request):
+        form = RegistrationForm(request.POST)
+
+        if form.is_valid():
+            company_name = form.cleaned_data["company_name"]
+            schema_name = "".join(company_name.split(" ")).lower()
+            email = form.cleaned_data["email"]
+            password = form.cleaned_data["password2"]
+
+            tenant = Client(
+                schema_name=schema_name,
+                name=company_name,
+            )
+            tenant.save()
+
+            # Add one or more domains for the tenant
+            domain = Domain()
+            domain.domain = (
+                schema_name + ".localhost"
+            )  # don't add your port or www here! on a local server you'll want to use localhost here
+            domain.tenant = tenant
+            domain.is_primary = True
+            domain.save()
+
+            # Create a new user object
+            with schema_context(schema_name):
+                User.objects.create_user(
+                    username=schema_name,
+                    password=password,
+                    email=email,
+                    tenant=tenant,
+                    is_staff=False,
+                    is_superuser=False,
+                )
+            send_mail(
+                subject="IsInSpec Registration",
+                message=f"Please go to http://{domain}:8000/accounts/login and"
+                f" activate your account with the username: {schema_name}"
+                f" and the password submitted during registration",
+                from_email="pythonzet@gmail.com",
+                recipient_list=[email],
+                fail_silently=False,
+            )
+
+            return HttpResponseRedirect(f"http://{domain}:8000/accounts/login")
+
+        return render(request, "register.html", {"form": form})
 
 
 class CustomLoginView(LoginView):

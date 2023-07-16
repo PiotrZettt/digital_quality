@@ -42,6 +42,7 @@ ALLOWED_HOSTS: list[str] = env("ALLOWED_HOSTS")
 SHARED_APPS = [
     "django_tenants",
     "accounts",
+    "verify_email.apps.VerifyEmailConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -149,6 +150,16 @@ STATIC_URL = "static/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
+
+# Email configuration
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = env("EMAIL_ID")
+EMAIL_HOST_PASSWORD = env("EMAIL_PW")
+
+DEFAULT_FROM_EMAIL = "noreply<no_reply@domain.com>"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 

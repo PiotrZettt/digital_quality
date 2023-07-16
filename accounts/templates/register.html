@@ -1,0 +1,16 @@
+{% extends 'base_generic.html' %}  <!-- If you have a base template, otherwise remove this line -->
+
+{% block content %}
+  <h2>SignIn</h2>
+
+  <form method="post" action="{% url 'signin' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">SignIn</button>
+
+    {% if error_message %}
+      <p>{{ error_message }}</p>
+    {% endif %}
+  </form>
+
+{% endblock %}
