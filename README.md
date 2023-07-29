@@ -100,3 +100,6 @@ To run the app:
 ```commandline
 python manage.py runserver
 ```
+Go to: \
+http://localhost:8000/accounts/create_tenant_user \
+to start
