@@ -38,6 +38,8 @@ and their own DB schema created for data isolation.
 
 ## Setup project
 
+You will need a gmail account for testing the email functionality of the application.
+
 Create a new folder and clone the repo.
 ```commandline
 git clone git@github.com:PiotrZettt/digital_quality.git
@@ -56,33 +58,25 @@ touch .env && open .env
 
 Set the variables like so:
 
-
 ALLOWED_HOSTS=* \
 DEBUG=on \
 SECRET_KEY='some_string' \
 PYTHONBUFFERED=1
 
+EMAIL_ID='your-gmail-address' \
+EMAIL_PW='your-gmail-password'
+
 Save and close the file
 
 You are ready now to install the requirements.
-Create a requirements-dev.txt
-```commandline
-touch requirements-dev.txt && open requirements-dev.txt
+
 ```
-Add: \
-pip-tools \
-pre-commit
-
-Save and close the file.
-
-Install the dev tools:
-```commandline
 pip install -r requirements-dev.txt
 ```
 
 Compile the requirements.txt file by
 ```commandline
-pip-compile
+pip-compile requirements.in
 ```
 Install the requirements.txt
 ```commandline

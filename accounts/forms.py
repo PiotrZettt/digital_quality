@@ -19,4 +19,4 @@ class RegistrationForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ["company_name", "email"]
+        fields = ["company_name", "first_name", "email"]

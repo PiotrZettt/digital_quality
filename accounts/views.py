@@ -15,6 +15,13 @@ from .models import Client, Domain, User
 from .serializers import ClientSerializer, DomainSerializer
 
 
+def home(request):
+    company = request.user.company_name
+
+    context = {"company": company}
+    return render(request, "home.html", context=context)
+
+
 def create_tenant_user_view(request):
     if request.method == "POST":
         # Retrieve the form data submitted by the user
@@ -46,6 +53,7 @@ def create_tenant_user_view(request):
                     username=schema_name,
                     password=password1,
                     email=email,
+                    company_name=company_name,
                     tenant=tenant,
                     is_staff=False,
                     is_superuser=False,

@@ -12,6 +12,7 @@ class Client(TenantMixin):
 class User(AbstractUser):
     tenant = models.ForeignKey(Client, on_delete=models.CASCADE)
     groups = models.ManyToManyField(Group, related_name="account_users")
+    company_name = models.CharField(max_length=200, default=" ")
     user_permissions = models.ManyToManyField(Permission, related_name="accounts_permissions")
 
 

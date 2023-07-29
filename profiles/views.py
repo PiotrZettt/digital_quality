@@ -4,7 +4,10 @@ from .models import User
 
 
 def profile_view(request):
-    return render(request, "index.html")
+    message = f"Welcome to IsInSpec. This is you profile of {request.user.company_name}"
+
+    context = {"message": message}
+    return render(request, "index.html", context=context)
 
 
 def add_staff(request):

@@ -163,4 +163,4 @@ DEFAULT_FROM_EMAIL = "noreply<no_reply@domain.com>"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-LOGIN_REDIRECT_URL = "frontend:home"
+LOGIN_REDIRECT_URL = "home"
