@@ -85,7 +85,7 @@ pip install -r requirements.txt
 
 Install the pre-commit tools:
 ```commandline
-pre-comit install
+pre-commit install
 ```
 
 Now with every commit attempt a set of checks will be performed.
