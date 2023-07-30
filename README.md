@@ -91,7 +91,21 @@ pre-comit install
 Now with every commit attempt a set of checks will be performed.
 
 Before you can run the project you will need to config the database in settings.py - 'DATABASES'. \
-Create a Postgres database and put all the credentials including name, username, host, password and port number.
+Create a Postgres database and put all the credentials including name, username, host, password and port number
+in the project/settings.py file:
+
+```commandline
+DATABASES = {
+    "default": {
+        "ENGINE": "django_tenants.postgresql_backend",
+        "NAME": "db_name",
+        "USER": "db_username",
+        "PASSWORD": "db_password",
+        "HOST": "localhost",
+        "PORT": "5432",
+    }
+}
+```
 
 The app uses the django-tenant package to provide a multi-tenant functionality.
 Please read the django-tenant documentation for further details.

@@ -17,19 +17,24 @@ from .serializers import ClientSerializer, DomainSerializer
 
 def home(request):
     company = request.user.company_name
+    first_name = request.user.first_name
 
-    context = {"company": company}
-    return render(request, "home.html", context=context)
+    print(first_name)
+
+    context = {"company": company, "first_name": first_name}
+    return render(request, "home.html", context)
 
 
 def create_tenant_user_view(request):
     if request.method == "POST":
         # Retrieve the form data submitted by the user
         company_name = request.POST["company_name"]
+        first_name = request.POST["first_name"]
         schema_name = "".join(company_name.split(" ")).lower()
         password1 = request.POST["password1"]
         password2 = request.POST["password2"]
-        email = request.POST["email"]
+
+        print("prints:", company_name, first_name)
 
         if password1 == password2:
             tenant = Client(
@@ -52,8 +57,6 @@ def create_tenant_user_view(request):
                 User.objects.create_user(
                     username=schema_name,
                     password=password1,
-                    email=email,
-                    company_name=company_name,
                     tenant=tenant,
                     is_staff=False,
                     is_superuser=False,
@@ -80,6 +83,7 @@ class UserRegistrationView(View):
         if form.is_valid():
             company_name = form.cleaned_data["company_name"]
             schema_name = "".join(company_name.split(" ")).lower()
+            first_name = request.POST["first_name"]
             email = form.cleaned_data["email"]
             password = form.cleaned_data["password2"]
 
@@ -103,6 +107,8 @@ class UserRegistrationView(View):
                 User.objects.create_user(
                     username=schema_name,
                     password=password,
+                    company_name=company_name,
+                    first_name=first_name,
                     email=email,
                     tenant=tenant,
                     is_staff=False,
@@ -110,7 +116,7 @@ class UserRegistrationView(View):
                 )
             send_mail(
                 subject="IsInSpec Registration",
-                message=f"Please go to http://{domain}:8000/accounts/login and"
+                message=f"Hi {first_name}. Please go to http://{domain}:8000/accounts/login and"
                 f" activate your account with the username: {schema_name}"
                 f" and the password submitted during registration",
                 from_email="pythonzet@gmail.com",

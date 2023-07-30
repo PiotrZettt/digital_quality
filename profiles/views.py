@@ -3,11 +3,8 @@ from django.shortcuts import render
 from .models import User
 
 
-def profile_view(request):
-    message = f"Welcome to IsInSpec. This is you profile of {request.user.company_name}"
-
-    context = {"message": message}
-    return render(request, "index.html", context=context)
+def welcome_screen(request):
+    return render(request, "index.html")
 
 
 def add_staff(request):
