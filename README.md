@@ -107,6 +107,25 @@ DATABASES = {
 }
 ```
 
+Create the database tables by:
+
+```commandline
+python manage.py migrate
+```
+
+Create the admin user by:
+
+```commandline
+python manage.py createsuperuser
+```
+
+Create the public tenant.
+```commandline
+python manage.py create_tenant
+```
+
+When prompted, set the schema name to "public" and the domain to "localhost".
+
 The app uses the django-tenant package to provide a multi-tenant functionality.
 Please read the django-tenant documentation for further details.
 
