@@ -4,7 +4,7 @@ from .models import User
 
 
 def welcome_screen(request):
-    return render(request, "index.html")
+    return render(request, "auth.html")
 
 
 def add_staff(request):

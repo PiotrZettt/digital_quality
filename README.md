@@ -113,19 +113,6 @@ Create the database tables by:
 python manage.py migrate
 ```
 
-Create the admin user by:
-
-```commandline
-python manage.py createsuperuser
-```
-
-Create the public tenant.
-```commandline
-python manage.py create_tenant
-```
-
-When prompted, set the schema name to "public" and the domain to "localhost".
-
 The app uses the django-tenant package to provide a multi-tenant functionality.
 Please read the django-tenant documentation for further details.
 
@@ -134,5 +121,5 @@ To run the app:
 python manage.py runserver
 ```
 Go to: \
-http://localhost:8000/accounts/create_tenant_user \
+http://localhost:8000/accounts/signin \
 to start

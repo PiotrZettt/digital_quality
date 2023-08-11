@@ -20,5 +20,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("accounts/", include("accounts.urls")),
     path("verification/", include("verify_email.urls")),
-    path("", include("profiles.urls")),
+    path("", include("frontend.urls")),
 ]

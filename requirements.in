@@ -8,3 +8,4 @@ pillow==9.5.0
 django-tenants==3.5.0
 psycopg2-binary==2.9.6
 django-verify-email==2.0.3
+whitenoise==6.4.0
